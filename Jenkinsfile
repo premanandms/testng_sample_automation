@@ -28,7 +28,7 @@ pipeline {
             }
         }
     
-        }
+        
         stage('Test') {
 		
             always {
@@ -54,4 +54,6 @@ pipeline {
                 }
             }
         }
-    }
+		
+	}
+}

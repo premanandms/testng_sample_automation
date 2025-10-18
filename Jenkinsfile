@@ -43,7 +43,6 @@ pipeline {
 		// Always execute this block
         always {
             echo 'Pipeline finished. Cleaning up workspace...'
-			junit 'target/surefire-reports/*.xml'
         }		
 	}
 }

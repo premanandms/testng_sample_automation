@@ -28,13 +28,7 @@ pipeline {
             }
         } 
 	}
-    post {
-	
-		// Always execute this block
-        always {
-            echo 'Pipeline finished. Cleaning up workspace...'
-        }
-        
+    post {		       
         // Execute only if the entire pipeline was successful
         success {
             echo 'Build Successful! Archiving artifact.'
@@ -42,15 +36,14 @@ pipeline {
             // Adjust the path pattern if you build a WAR or other file
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
-
         // Execute only if the pipeline failed in any stage
         failure {
             echo 'Pipeline FAILED! Review the console output.'
-        }
-		
-		always {
+        }		
+		// Always execute this block
+        always {
+            echo 'Pipeline finished. Cleaning up workspace...'
 			junit 'target/surefire-reports/*.xml'
-		}
-		
+        }		
 	}
 }

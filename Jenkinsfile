@@ -26,32 +26,15 @@ pipeline {
                 // Run full tests, then package the application
                 sh 'mvn package'
             }
-        }
-    
-        
-        stage('Test') {
-		
-            always {
-				echo 'Pipeline finished. Cleaning up workspace...'
-			}
-			
-			// Execute only if the entire pipeline was successful
-			success {
-				echo 'Build Successful! Archiving artifact.'
-				// Archive the built artifact (e.g., the JAR file)
-				// Adjust the path pattern if you build a WAR or other file
-				archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-			}
-
-			// Execute only if the pipeline failed in any stage
-			failure {
-				echo 'Pipeline FAILED! Review the console output.'
-			}
+        }        
+        stage('Post') {	
+            
 			
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+				
             }
         }
 		

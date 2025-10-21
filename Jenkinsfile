@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo 'Packaging the final application (JAR/WAR)...'
                 // Run full tests, then package the application
-                bat 'mvn test'
+                bat 'mvn teest'
             }
 	    post {
 		always {
